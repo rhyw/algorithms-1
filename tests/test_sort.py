@@ -1,25 +1,12 @@
-from algorithms.sort import (
-    bitonic_sort,
-    bogo_sort,
-    bubble_sort,
-    comb_sort,
-    counting_sort,
-    cycle_sort,
-    max_heap_sort, min_heap_sort,
-    insertion_sort,
-    merge_sort,
-    pancake_sort,
-    quick_sort,
-    selection_sort,
-    bucket_sort,
-    shell_sort,
-    radix_sort,
-    gnome_sort,
-    cocktail_shaker_sort,
-    top_sort, top_sort_recursive
-)
-
 import unittest
+
+from algorithms.sort import (bitonic_sort, bogo_sort, bubble_sort, bucket_sort,
+                             cocktail_shaker_sort, comb_sort, counting_sort,
+                             cycle_sort, gnome_sort, insertion_sort,
+                             max_heap_sort, merge_sort, min_heap_sort,
+                             pancake_sort, quick_sort, radix_sort,
+                             selection_sort, shell_sort, top_sort,
+                             top_sort_recursive)
 
 
 class TestSuite(unittest.TestCase):
@@ -31,9 +18,9 @@ class TestSuite(unittest.TestCase):
         self.assertEqual([1, 2, 3, 5, 23, 57, 65, 1232],
                          bitonic_sort([1, 3, 2, 5, 65, 23, 57, 1232]))
         self.assertEqual([1, 2, 3, 5, 23, 57, 65, 1232],
-                         bitonic_sort([1, 3, 2, 5, 65, 23, 57, 1232],False))
+                         bitonic_sort([1, 3, 2, 5, 65, 23, 57, 1232], False))
         self.assertEqual([1232, 65, 57, 23, 5, 3, 2, 1],
-                         bitonic_sort([1, 2, 3, 5, 65, 23, 57, 1232],True))
+                         bitonic_sort([1, 2, 3, 5, 65, 23, 57, 1232], True))
 
     def test_bubble_sort(self):
         self.assertEqual([1, 5, 23, 57, 65, 1232],
@@ -81,15 +68,15 @@ class TestSuite(unittest.TestCase):
 
     def test_bucket_sort(self):
         self.assertEqual([1, 5, 23, 57, 65, 1232],
-                        bucket_sort([1, 5, 65, 23, 57, 1232]))
+                         bucket_sort([1, 5, 65, 23, 57, 1232]))
 
     def test_shell_sort(self):
         self.assertEqual([1, 5, 23, 57, 65, 1232],
-                        shell_sort([1, 5, 65, 23, 57, 1232]))
+                         shell_sort([1, 5, 65, 23, 57, 1232]))
 
     def test_radix_sort(self):
         self.assertEqual([1, 5, 23, 57, 65, 1232],
-                        radix_sort([1, 5, 65, 23, 57, 1232]))
+                         radix_sort([1, 5, 65, 23, 57, 1232]))
 
     def test_gnome_sort(self):
         self.assertEqual([1, 5, 23, 57, 65, 1232],
@@ -97,23 +84,24 @@ class TestSuite(unittest.TestCase):
 
     def test_cocktail_shaker_sort(self):
         self.assertEqual([1, 5, 23, 57, 65, 1232],
-                        cocktail_shaker_sort([1, 5, 65, 23, 57, 1232]))
+                         cocktail_shaker_sort([1, 5, 65, 23, 57, 1232]))
+
 
 class TestTopSort(unittest.TestCase):
     def setUp(self):
         self.depGraph = {
-                            "a" : [ "b" ],
-                            "b" : [ "c" ],
-                            "c" :  [ 'e'],
-                            'e' : [ 'g' ],
-                            "d" : [ ],
-                            "f" : ["e" , "d"],
-                            "g" : [ ]
-                        }
+            "a": ["b"],
+            "b": ["c"],
+            "c": ['e'],
+            'e': ['g'],
+            "d": [],
+            "f": ["e", "d"],
+            "g": []
+        }
 
     def test_topsort(self):
         res = top_sort_recursive(self.depGraph)
-        #print(res)
+        # print(res)
         self.assertTrue(res.index('g') < res.index('e'))
         res = top_sort(self.depGraph)
         self.assertTrue(res.index('g') < res.index('e'))
