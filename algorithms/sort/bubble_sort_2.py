@@ -10,12 +10,11 @@ def bubble_sort(arr):
     # Perform sort
     j = 0
     # j is the loop number needed to get an array sorted.
-    while j < list_length - 1:
+    for j in range(list_length-2):
         for i in range(list_length-1):
             if arr[i] > arr[i+1]:
                 swap(i, i+1)
         print('Round {}: {}'.format(j+1, arr))
-        j += 1
 
     return arr
 
